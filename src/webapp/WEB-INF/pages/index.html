@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>User List</title>
 </head>
 <body>
-<div>
-    <h1>TTT</h1>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
-</div>
+<h1>List of Users</h1>
+<a th:href="@{/addUser}">Add New User</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <a th:href="@{/editUser/{id}(id=${user.id})}">Edit</a> |
+            <a th:href="@{/deleteUser/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
